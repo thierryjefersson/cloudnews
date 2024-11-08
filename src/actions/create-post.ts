@@ -16,7 +16,7 @@ export default async function createPost(formData: CreatePostSchema) {
     };
     if (!isValid)
       throw new Error("Não possui autorização para prosseguir com a ação");
-    const response = await fetch("http://localhost:3333/api/posts", {
+    const response = await fetch(`${process.env.URL_API}/posts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

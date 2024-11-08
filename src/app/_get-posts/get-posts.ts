@@ -8,7 +8,7 @@ export default async function getPosts(
   search: string = "",
 ) {
   try {
-    const url = `http://localhost:3333/api/posts/?author=${author}&page=${page}&search=${search}`;
+    const url = `${process.env.URL_API}/posts/?author=${author}&page=${page}&search=${search}`;
     const response = await fetch(url, {
       next: {
         tags: ["posts"],

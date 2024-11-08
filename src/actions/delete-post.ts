@@ -23,7 +23,7 @@ export default async function deletePost({
     if (!author || !post_slug) throw new Error("Postagem não encontrada");
 
     const response = await fetch(
-      `http://localhost:3333/api/posts/${author}/${post_slug}`,
+      `${process.env.URL_API}/posts/${author}/${post_slug}`,
       {
         method: "DELETE",
         headers: {

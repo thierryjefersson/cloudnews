@@ -5,7 +5,7 @@ import { CreateUserSchema } from "@/schemas/cadastrar";
 export default async function createUser(formData: CreateUserSchema) {
   try {
     const { email, name, password } = formData;
-    const response = await fetch("http://localhost:3333/api/users", {
+    const response = await fetch(`${process.env.URL_API}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

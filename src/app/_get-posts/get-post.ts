@@ -46,7 +46,7 @@ export default async function getPost(author: string, post_slug: string) {
   try {
     if (!author || !post_slug) throw new Error("Postagem não encontrada");
     const response = await fetch(
-      `http://localhost:3333/api/posts/${author}/${post_slug}`,
+      `${process.env.URL_API}/posts/${author}/${post_slug}`,
       {
         next: {
           tags: ["post"],

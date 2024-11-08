@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 export default async function login(formData: LoginSchema) {
   const cookieStore = await cookies();
   try {
-    const response = await fetch("http://localhost:3333/api/users/login", {
+    const response = await fetch(`${process.env.URL_API}/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
