@@ -1,101 +1,55 @@
-import Image from "next/image";
+import ArticleTopic from "@/components/article-topic";
+import SearchForm from "@/components/form/search-form";
+import getPosts from "./_get-posts/get-posts";
+import Pagination from "@/components/pagination";
 
-export default function Home() {
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ search?: string }>;
+}) {
+  const search = (await searchParams).search;
+  return {
+    title: `${search ? search : "Página inicial"} | CloudNews`,
+    description:
+      "Tudo sobre tecnologia você encontra na CloudNews, postagens e interações com a comunidade",
+  };
+}
+
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ search?: string; page?: number }>;
+}) {
+  const { search, page: pageNumber } = await searchParams;
+
+  const result = await getPosts(pageNumber, "", search);
+  if (!result) return;
+  const { topics, page, total_pages } = result;
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <main>
+      <section className="container">
+        <SearchForm search={search} />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        <div className="mx-auto my-4 grid w-full max-w-[1100px] grid-cols-[auto_1fr] items-center gap-5">
+          <div className="h-[40px] w-1 bg-primary sm:h-[25px]"></div>
+          <h1 className="line-clamp-3 text-xl font-bold sm:line-clamp-2">
+            {search
+              ? `Resultados da pesquisa para "${search.toUpperCase().replaceAll("%20", " ")}" `
+              : "Tudo sobre tecnologia você encontra aqui"}
+          </h1>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        <div className="mx-auto mt-4 flex max-w-[1100px] flex-col">
+          {topics &&
+            topics.map((topic) => (
+              <ArticleTopic topic={topic} key={topic.id} />
+            ))}
+        </div>
+
+        <Pagination page={page} search={search} totalPages={total_pages} />
+      </section>
+    </main>
   );
 }
