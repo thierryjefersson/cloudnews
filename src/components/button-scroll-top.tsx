@@ -23,17 +23,20 @@ export default function ButtonScrollTop() {
   }, []);
 
   return (
-    <div className="fixed bottom-0 right-0 pb-4 pr-4">
-      {isVisible && (
-        <Button
-          title="Retornar ao topo"
-          size={"icon"}
-          variant={"ghost"}
-          onClick={scrollToTop}
-        >
-          <ChevronUp />
-        </Button>
-      )}
+    <div
+      data-visible={isVisible}
+      className="pointer-events-none fixed bottom-0 right-0 pb-6 pr-4 opacity-0 transition-opacity data-[visible=true]:pointer-events-auto data-[visible=true]:opacity-100"
+    >
+      <Button
+        data-visible={isVisible}
+        title="Retornar ao topo"
+        size={"icon"}
+        variant={"ghost"}
+        className="pointer-events-none opacity-0 transition-opacity data-[visible=true]:pointer-events-auto data-[visible=true]:opacity-100"
+        onClick={scrollToTop}
+      >
+        <ChevronUp />
+      </Button>
     </div>
   );
 }
