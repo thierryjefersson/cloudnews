@@ -77,7 +77,6 @@ export default function CadastrarForm() {
       </div>
       <div>
         <Label htmlFor="password">Senha</Label>
-
         <Input
           type="password"
           placeholder="********"
@@ -94,6 +93,7 @@ export default function CadastrarForm() {
         <Label htmlFor="confirmPassword">Confirmar a senha</Label>
         <div className="relative">
           <Input
+            aria-label="Confirmação de senha"
             type={isHidden ? "password" : "text"}
             placeholder="********"
             id="confirmPassword"
@@ -104,6 +104,8 @@ export default function CadastrarForm() {
             type="button"
             size={"icon"}
             variant={"ghost"}
+            title="Mostrar/ocultar senha"
+            aria-label="Mostrar/ocultar senha"
             className="absolute right-2 top-0 rounded-full"
             onClick={() => setIsHidden((prev) => !prev)}
           >

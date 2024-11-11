@@ -34,7 +34,7 @@ export default function ModeToggle() {
         onClick={() => setTheme("dark")}
       >
         <Moon className="h-4 w-4" />
-        <span className="sr-only">Dark mode</span>
+        <span className="sr-only">Modo escuro</span>
       </Button>
       <div className="h-full w-0.5 bg-muted"></div>
       <Button
@@ -52,7 +52,7 @@ export default function ModeToggle() {
         onClick={() => setTheme("light")}
       >
         <Sun className="h-4 w-4" />
-        <span className="sr-only">Light mode</span>
+        <span className="sr-only">Modo claro</span>
       </Button>
     </div>
   );

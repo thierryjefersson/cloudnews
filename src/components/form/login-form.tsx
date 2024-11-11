@@ -61,6 +61,7 @@ export default function LoginForm() {
             size={"icon"}
             variant={"ghost"}
             title="Mostrar/ocultar senha"
+            aria-label="Mostrar/ocultar senha"
             className="absolute right-2 top-6 rounded-full"
             onClick={() => setIsHidden((prev) => !prev)}
           >

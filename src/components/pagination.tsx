@@ -30,7 +30,9 @@ export default function Pagination({
         <div className="mx-auto my-10 flex max-w-[600px] items-center justify-center gap-6">
           <Link
             data-disabled={page <= 1}
-            className="group flex gap-1 underline-offset-4 hover:underline data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50"
+            aria-disabled={page <= 1}
+            aria-label="Voltar para a página anterior de postagens"
+            className="group flex gap-1 underline-offset-4 hover:underline data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-60"
             href={generateLink(page > 1 ? page - 1 : 1)}
           >
             <ChevronLeft className="text-primary transition-transform group-hover:-translate-x-1" />
@@ -38,7 +40,9 @@ export default function Pagination({
           </Link>
           <Link
             data-disabled={page >= totalPages}
-            className="group flex gap-1 underline-offset-4 hover:underline data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50"
+            aria-disabled={page >= totalPages}
+            aria-label="Ir para a próxima página de postagens"
+            className="group flex gap-1 underline-offset-4 hover:underline data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-60"
             href={generateLink(page < totalPages ? page + 1 : totalPages)}
           >
             Próximo

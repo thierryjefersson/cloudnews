@@ -36,6 +36,7 @@ export default function ButtonScrollTop() {
         onClick={scrollToTop}
       >
         <ChevronUp />
+        <span className="sr-only">Retornar ao topo</span>
       </Button>
     </div>
   );

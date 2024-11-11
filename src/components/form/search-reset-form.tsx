@@ -10,13 +10,14 @@ export default function SearchReset() {
   };
 
   return (
-    <button type="reset" onClick={reset}>
+    <button aria-label="Botão de apagar" type="reset" onClick={reset}>
       <Link
         href="/"
         className="absolute right-3 top-1.5 block p-1 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
       >
         <X size={16} />
       </Link>
+      <span className="sr-only">Apagar</span>
     </button>
   );
 }
