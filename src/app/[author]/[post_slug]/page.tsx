@@ -2,9 +2,11 @@ import getPost from "@/app/_get-posts/get-post";
 import NotFound from "@/app/not-found";
 import ArticlePost from "@/components/article-post";
 import ButtonDeletePost from "@/components/button-delete-post";
+import Loading from "@/components/loading";
 import formatDate from "@/functions/format-date";
 import readingTime from "@/functions/reading-time";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export async function generateMetadata({
   params,
@@ -17,7 +19,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function PostPage({
+async function Post({
   params,
 }: {
   params: Promise<{ author: string; post_slug: string }>;
@@ -48,5 +50,17 @@ export default async function PostPage({
         <ArticlePost body={post.body} />
       </article>
     </main>
+  );
+}
+
+export default async function PostPage({
+  params,
+}: {
+  params: Promise<{ author: string; post_slug: string }>;
+}) {
+  return (
+    <Suspense fallback={<Loading />}>
+      <Post params={params} />
+    </Suspense>
   );
 }
