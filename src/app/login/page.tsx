@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <div className="mx-auto flex max-w-[450px] flex-col justify-center px-5">
+    <div className="mx-auto flex max-w-[450px] flex-col justify-center px-5 md:pt-60">
       <div className="flex items-center gap-5">
         <div className="h-0.5 w-full bg-gradient-to-l from-primary to-background"></div>
         <h2 className="text-center text-2xl font-bold text-foreground md:mb-1 md:text-3xl">
