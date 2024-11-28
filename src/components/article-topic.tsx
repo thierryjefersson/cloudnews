@@ -17,6 +17,7 @@ export default function ArticleTopic({ topic }: { topic: Topic }) {
       <Link
         aria-label="título"
         href={`/${author.name}/${slug}`}
+        scroll={false}
         className="line-clamp-4 font-semibold underline-offset-2 hover:underline"
       >
         {title}
