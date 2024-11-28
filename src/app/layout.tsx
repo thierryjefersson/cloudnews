@@ -7,6 +7,7 @@ import getUser from "@/actions/get-user";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import ButtonScrollTop from "@/components/button-scroll-top";
+import Footer from "@/components/footer";
 
 const montserrat = Montserrat({
   weight: ["400", "500", "600", "700", "900"],
@@ -41,6 +42,7 @@ export default async function RootLayout({
           >
             <Header />
             {children}
+            <Footer />
           </ThemeProvider>
           <Toaster />
           <ButtonScrollTop />
