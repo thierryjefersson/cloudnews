@@ -27,6 +27,12 @@ export default function LoginPage() {
           Cadastre-se
         </Link>
       </p>
+      <p className="mt-1 text-center text-sm">
+        Esqueceu sua senha?{" "}
+        <Link href="login/recuperar" className="text-primary hover:underline">
+          Clique aqui
+        </Link>
+      </p>
     </div>
   );
 }
