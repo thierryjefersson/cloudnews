@@ -6,7 +6,7 @@ export default async function resetPassword(data: {
 }) {
   try {
     const response = await fetch(
-      "http://localhost:3333/api/users/reset-password",
+      `${process.env.URL_API}/users/reset-password`,
       {
         method: "POST",
         headers: {

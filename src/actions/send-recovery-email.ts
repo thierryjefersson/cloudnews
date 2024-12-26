@@ -4,7 +4,7 @@ import { RecuperarSchema } from "@/schemas/recuperar";
 
 export default async function sendRecoveryEmail(data: RecuperarSchema) {
   try {
-    await fetch("http://localhost:3333/api/users/forgot-password", {
+    await fetch(`${process.env.URL_API}/users/forgot-password`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
